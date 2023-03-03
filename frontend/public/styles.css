@@ -1,3 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
 body {
-    background-color: yellow;
+    overflow: hidden;
+}
+
+nav {
+    background-color: #3F4E4F;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-family: 'Tilt Warp', cursive;
+    box-shadow: black 10px 0px 8px;
+    position: relative;
+    top: 0;
+}
+
+nav>h1 {
+    font-weight: 200;
+    font-size: 2rem;
+}
+
+.chatting-area {
+    height: 80vh;
+    background-color: #2C3639;
+    overflow-y: scroll;
+    font-size: 1.5rem;
+    line-height: 30px;
+    text-align: justify;
+}
+
+/* scrollbar  */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3F4E4F;
+    border-radius: 20px;
+}
+
+.typing-area {
+    background-color: #3F4E4F;
+    margin-bottom: 10px;
+    height: 10.5vh;
+    padding-top: 1%;
+    text-align: center;
+}
+
+.typing-area>form>input {
+    background-color: #2C3639;
+    font-size: large;
+    border: 0;
+    display: inline-block;
+    width: 70%;
+    padding: 10px 5px;
+    margin-right: 10px;
+}
+
+.send-icon {
+    position: relative;
+    top: 10px;
+    cursor: pointer;
 }

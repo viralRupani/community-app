@@ -1,9 +1,16 @@
-import React from 'react';
+import React from "react";
+import ChattingArea from "./ChattingArea";
+import Navbar from "./Navbar";
+import TypingArea from "./TypingArea";
 
 function App() {
-    return (
-        <h1>Hello world</h1>
-    )
+  return (
+    <div>
+      <Navbar />
+      <ChattingArea />
+      <TypingArea />
+    </div>
+  );
 }
 
 export default App;
