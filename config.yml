@@ -1,0 +1,13 @@
+# project information
+version: '1.0'
+name: community-app
+description: based on Flask and React to interect with people
+
+# frontend information
+frontend:
+  api_url: http://localhost:5000/
+
+# backend information
+server:
+  port: 5000
+  debug: True
