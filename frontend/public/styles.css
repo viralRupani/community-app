@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
 
+:root {
+    --color1: #3F4E4F;
+    --color2: #2C3639;
+}
 
 * {
     margin: 0;
@@ -12,7 +16,7 @@ body {
 }
 
 nav {
-    background-color: #3F4E4F;
+    background-color: var(--color1);
     width: 100%;
     text-align: center;
     padding: 10px 0;
@@ -27,9 +31,15 @@ nav>h1 {
     font-size: 2rem;
 }
 
+.header {
+    height: 100vh;
+    background-color: var(--color2);
+    overflow: scroll;
+}
+
 .chatting-area {
     height: 80vh;
-    background-color: #2C3639;
+    background-color: var(--color2);
     overflow-y: scroll;
     font-size: 1.5rem;
     line-height: 30px;
@@ -42,12 +52,12 @@ nav>h1 {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #3F4E4F;
+    background: var(--color1);
     border-radius: 20px;
 }
 
 .typing-area {
-    background-color: #3F4E4F;
+    background-color: var(--color1);
     margin-bottom: 10px;
     height: 10.5vh;
     padding-top: 1%;
@@ -55,7 +65,7 @@ nav>h1 {
 }
 
 .typing-area>form>input {
-    background-color: #2C3639;
+    background-color: var(--color2);
     font-size: large;
     border: 0;
     display: inline-block;

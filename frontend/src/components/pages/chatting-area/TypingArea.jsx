@@ -14,8 +14,20 @@ function TypingArea() {
 
   function handleSubmit(event) {
     setText(input);
+    sendData();
     setInput("");
     event.preventDefault();
+  }
+
+  function sendData() {
+    fetch("/chat", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data: "data" }),
+    });
   }
 
   return (
