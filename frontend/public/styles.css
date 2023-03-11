@@ -60,7 +60,7 @@ nav>h1 {
     background-color: var(--color1);
     margin-bottom: 10px;
     height: 10.5vh;
-    padding-top: 1%;
+    padding-top: 2px;
     text-align: center;
 }
 
@@ -78,4 +78,51 @@ nav>h1 {
     position: relative;
     top: 10px;
     cursor: pointer;
+}
+
+.login-register-form {
+    height: 100vh;
+    background-color: var(--color2);
+    text-align: center;
+    padding-top: 5rem;
+}
+
+.login-register-form>h1 {
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+
+.form-input {
+    border: 1px solid rgba(252, 252, 252, 0.4);
+    color: white;
+    font-weight: 300;
+    display: block;
+    font-size: 18px;
+    height: 30px;
+    width: 250px;
+    padding: 10px 15px;
+    background-color: var(--color1);
+    border-radius: 2px;
+    margin: 0 auto 10px;
+}
+
+.submit-button {
+    appearance: none;
+    outline: 0;
+    background-color: white;
+    border: 0;
+    padding: 10px 15px;
+    color: var(--color1);
+    border-radius: 3px;
+    width: 282px;
+    font-size: 18px;
+    margin: 0 auto 10px;
+    display: block;
+    cursor: pointer;
+}
+
+.recaptcha {
+    display: inline-block;
+    margin: 20px;
 }
