@@ -9,7 +9,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 function Login() {
   const [loginFormInfo, setLoginFormInfo] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [loggedIn, setLoggedIn] = useState(false);
@@ -45,12 +45,12 @@ function Login() {
         data: JSON.stringify(loginFormInfo),
       }).then((res) => {
         if (res.data["response"] === "success") {
-          toast.success("Registred");
+          toast.success("Logged in");
           handleLoggedIn();
         } else if (res.data["response"] === "failur") {
           console.log(res.data);
           console.log("there is some issue dude.");
-          toast.error("Check your email or password");
+          toast.error("Check your username or password");
         }
       });
     } else {
@@ -58,7 +58,7 @@ function Login() {
     }
 
     setLoginFormInfo({
-      email: "",
+      username: "",
       password: "",
     });
     event.preventDefault();
@@ -70,11 +70,11 @@ function Login() {
         <h1>Login for chat with your friends.</h1>
         <form onSubmit={handleSubmit}>
           <FormInput
-            type="email"
-            name="email"
-            placeholder="Email"
+            type="text"
+            name="username"
+            placeholder="Username"
             handleChange={handleChange}
-            value={loginFormInfo.email}
+            value={loginFormInfo.username}
           />
           <FormInput
             type="password"

@@ -51,7 +51,6 @@ function Register() {
         toast.error(res.data["reason"]);
       }
     });
-    toast.error("Please verify reCaptcha");
 
     setFormInfo({
       email: "",
