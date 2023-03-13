@@ -1,30 +1,32 @@
 from flask import Flask, request
 from pymongo import MongoClient
+from pymongo.errors import DuplicateKeyError
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
 client = MongoClient('localhost', 27017)
 db = client.chatDB
-users = db.users
 
+users = db.users
+users.create_index([("username", 1)], unique=True)
 
 @app.route('/register', methods=["POST"])
 def register():
     json_data = request.get_json()
-
-    if users.find_one({"username":json_data["username"] }):
-        return {"response": "failur", "reason": "Username is already in use"}
     if len(json_data["password"]) < 8:
         return {"response": "failur", "reason": "Password is too short"}
-    new_user = {
-        "email": json_data["email"],
-        "username": json_data["username"],
-        "password": generate_password_hash(
-            json_data["password"], method="pbkdf2:sha256", salt_length=8)
-    }
-    users.insert_one(new_user)
-    return {"response": "success"}, 200
+    try:
+        new_user = {
+            "email": json_data["email"],
+            "username": json_data["username"],
+            "password": generate_password_hash(
+                json_data["password"], method="pbkdf2:sha256", salt_length=8)
+        }
+        users.insert_one(new_user)
+        return {"response": "success"}, 200
+    except DuplicateKeyError:
+        return {"response": "failur", "reason": "Username is already in use"}
 
 
 @app.route('/login', methods=["POST"])

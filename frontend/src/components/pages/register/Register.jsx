@@ -34,23 +34,25 @@ function Register() {
   }
 
   function handleSubmit(event) {
-    console.log(formInfo.password.length);
-
-    axios({
-      url: "/register",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify(formInfo),
-    }).then((res) => {
-      if (res.data["response"] === "success") {
-        toast.success("Registred");
-        handleRegister();
-      } else if (res.data["response"] === "failur") {
-        toast.error(res.data["reason"]);
-      }
-    });
+    if (!!formInfo.email && !!formInfo.username && !!formInfo.password) {
+      axios({
+        url: "/register",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(formInfo),
+      }).then((res) => {
+        if (res.data["response"] === "success") {
+          toast.success("Registred");
+          handleRegister();
+        } else if (res.data["response"] === "failur") {
+          toast.error(res.data["reason"]);
+        }
+      });
+    } else {
+      toast.error("Please fill all the fields");
+    }
 
     setFormInfo({
       email: "",

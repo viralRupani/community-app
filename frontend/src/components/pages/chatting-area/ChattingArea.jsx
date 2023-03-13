@@ -1,10 +1,10 @@
 import React from "react";
 
-function ContentArea() {
+function ChattingArea() {
   return (
     <section className="chatting-area">
     </section>
   );
 }
 
-export default ContentArea;
+export default ChattingArea;
