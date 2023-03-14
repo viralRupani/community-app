@@ -13,20 +13,38 @@
 ![image not found](chatting-app.png)
 
 ## Setup
+_for project setup node, python and mongodb must be installed._
+```
+git clone git@github.com:viralRupani/community-app.git
 
-### For unix system
-```
-this 
-is 
-setup
-text
+-----SERVER SETUP-----
+1) cd community-app/server
+
+2)
+windows: python -m venv venv
+unix: python3 -m venv venv
+
+3)
+windows: 
+    cd venv/scripts/
+    activate
+    cd ../..
+
+unix: source venv/bin/activate
+
+4) pip install -r requirements.txt
+
+6) 
+window: set FLASK_APP=app.py
+unix: export FLASK_APP=app.py
+
+7) flask run --debug
+
+open new terminal
+-----FRONTEND SETUP-----
+1) cd community-app/frontend
+2) npm i
+3) npm start 
 ```
 
-### For windows system
-```
-this 
-is 
-setup
-text
-```
 
