@@ -2,7 +2,6 @@ import Header from "./pages/home/Header";
 import React from "react";
 import ChattingArea from "./pages/chatting-area/ChattingArea";
 import Navbar from "./Navbar";
-import TypingArea from "./pages/chatting-area/TypingArea";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import { Toaster } from "react-hot-toast";
@@ -20,15 +19,7 @@ function App() {
           <Route path="/" element={<Header />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/chatting-area"
-            element={
-              <>
-                <ChattingArea />
-                <TypingArea />
-              </>
-            }
-          />
+          <Route path="/chatting-area" element={<ChattingArea />} />
         </Routes>
       </BrowserRouter>
     </div>

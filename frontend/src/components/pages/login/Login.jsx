@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import SubmitButton from "../../SubmitButton";
-import "./Login.css";
 import FormInput from "../../FormInput";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
@@ -14,6 +13,11 @@ function Login() {
   });
   const [loggedIn, setLoggedIn] = useState(false);
   const [captcha, setCaptcha] = useState(false);
+
+  const token = localStorage.getItem("jwt_access_token");
+  if (!(!token && token !== "" && token !== undefined)) {
+    return <Navigate to="/chatting-area" replace={true} />;
+  }
 
   function handleReCaptchaChange() {
     setCaptcha(true);
@@ -45,6 +49,10 @@ function Login() {
         data: JSON.stringify(loginFormInfo),
       }).then((res) => {
         if (res.data["response"] === "success") {
+          localStorage.setItem(
+            "jwt_access_token",
+            res.data["jwt_access_token"]
+          );
           toast.success("Logged in");
           handleLoggedIn();
         } else if (res.data["response"] === "failur") {

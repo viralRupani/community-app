@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Register.css";
 import FormInput from "../../FormInput";
 import SubmitButton from "../../SubmitButton";
 import axios from "axios";
@@ -13,6 +12,11 @@ function Register() {
     password: "",
   });
   const [registered, setRegistred] = useState(false);
+
+  const token = localStorage.getItem("jwt_access_token");
+  if (!(!token && token !== "" && token !== undefined)) {
+    return <Navigate to="/chatting-area" replace={true} />;
+  }
 
   function handleRegister() {
     setRegistred(true);

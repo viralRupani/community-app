@@ -2,6 +2,8 @@ from flask import Flask, request
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import create_access_token, JWTManager, jwt_required
+import json
 
 app = Flask(__name__)
 
@@ -11,11 +13,17 @@ db = client.chatDB
 users = db.users
 users.create_index([("username", 1)], unique=True)
 
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False
+app.config["SECRET_KEY"] = "secret-key"
+
+JWTManager(app)
+
+
 @app.route('/register', methods=["POST"])
 def register():
     json_data = request.get_json()
     if len(json_data["password"]) < 8:
-        return {"response": "failur", "reason": "Password is too short"}
+        return json.dumps({"response": "failur", "reason": "Password is too short"})
     try:
         new_user = {
             "email": json_data["email"],
@@ -24,9 +32,9 @@ def register():
                 json_data["password"], method="pbkdf2:sha256", salt_length=8)
         }
         users.insert_one(new_user)
-        return {"response": "success"}, 200
+        return json.dumps({"response": "success"}), 200
     except DuplicateKeyError:
-        return {"response": "failur", "reason": "Username is already in use"}
+        return json.dumps({"response": "failur", "reason": "Username is already in use"})
 
 
 @app.route('/login', methods=["POST"])
@@ -36,8 +44,11 @@ def login():
     existing_user = users.find_one({"username": username})
     if existing_user:
         if check_password_hash(pwhash=existing_user["password"], password=json_data["password"]):
-            return {"response": "success"}
-    return {"response": "failur", "reason": "Username or Password issue"}
+            print(existing_user)
+            jwt_access_token = create_access_token(
+                identity=existing_user["username"])
+            return json.dumps({"response": "success", "jwt_access_token": jwt_access_token}), 200
+    return json.dumps({"response": "failur", "reason": "Username or Password issue"}), 401
 
 
 @app.route('/')
@@ -46,6 +57,7 @@ def index():
 
 
 @app.route('/chat', methods=['GET', 'POST'])
+@jwt_required()
 def chat():
     if request.method == 'POST':
         print(request.get_json()['data'])
